@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ArcadeXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificacion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Contrasenna" Type="nvarchar" MaxLength="20" />
+          <Property Name="RolID" Type="int" />
+        </EntityType>
+        <EntityType Name="Consolas">
+          <Key>
+            <PropertyRef Name="ConsolaID" />
+          </Key>
+          <Property Name="ConsolaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Fabricante" Type="nvarchar" MaxLength="100" />
+          <Property Name="FechaLanzamiento" Type="date" />
+        </EntityType>
+        <EntityType Name="DetallesPedidos">
+          <Key>
+            <PropertyRef Name="DetalleID" />
+          </Key>
+          <Property Name="DetalleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PedidoID" Type="int" />
+          <Property Name="JuegoID" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Errores">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mensaje" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Juegos">
+          <Key>
+            <PropertyRef Name="JuegoID" />
+          </Key>
+          <Property Name="JuegoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Genero" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaLanzamiento" Type="date" />
+          <Property Name="ConsolaID" Type="int" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="PedidoID" />
+          </Key>
+          <Property Name="PedidoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteID" Type="int" />
+          <Property Name="FechaPedido" Type="date" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Clientes__RolID__5070F446">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesP__Juego__571DF1D5">
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
+          <End Role="DetallesPedidos" Type="Self.DetallesPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Juegos">
+              <PropertyRef Name="JuegoID" />
+            </Principal>
+            <Dependent Role="DetallesPedidos">
+              <PropertyRef Name="JuegoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesP__Pedid__5629CD9C">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="0..1" />
+          <End Role="DetallesPedidos" Type="Self.DetallesPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="PedidoID" />
+            </Principal>
+            <Dependent Role="DetallesPedidos">
+              <PropertyRef Name="PedidoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__ConsolaI__4D94879B">
+          <End Role="Consolas" Type="Self.Consolas" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consolas">
+              <PropertyRef Name="ConsolaID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="ConsolaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__Cliente__534D60F1">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="RegistrarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Identificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="nvarchar" Mode="In" />
+          <Parameter Name="RolID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ArcadeXModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consolas" EntityType="Self.Consolas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetallesPedidos" EntityType="Self.DetallesPedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Errores" EntityType="Self.Errores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Juegos" EntityType="Self.Juegos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Clientes__RolID__5070F446" Association="Self.FK__Clientes__RolID__5070F446">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesP__Juego__571DF1D5" Association="Self.FK__DetallesP__Juego__571DF1D5">
+            <End Role="Juegos" EntitySet="Juegos" />
+            <End Role="DetallesPedidos" EntitySet="DetallesPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesP__Pedid__5629CD9C" Association="Self.FK__DetallesP__Pedid__5629CD9C">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="DetallesPedidos" EntitySet="DetallesPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__ConsolaI__4D94879B" Association="Self.FK__Juegos__ConsolaI__4D94879B">
+            <End Role="Consolas" EntitySet="Consolas" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__Cliente__534D60F1" Association="Self.FK__Pedidos__Cliente__534D60F1">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArcadeXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Contrasenna" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RolID" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Clientes__RolID__5070F446" FromRole="Clientes" ToRole="Roles" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__Cliente__534D60F1" FromRole="Clientes" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Consolas">
+          <Key>
+            <PropertyRef Name="ConsolaID" />
+          </Key>
+          <Property Name="ConsolaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fabricante" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaLanzamiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__Juegos__ConsolaI__4D94879B" FromRole="Consolas" ToRole="Juegos" />
+        </EntityType>
+        <EntityType Name="DetallesPedidos">
+          <Key>
+            <PropertyRef Name="DetalleID" />
+          </Key>
+          <Property Name="DetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PedidoID" Type="Int32" />
+          <Property Name="JuegoID" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Juegos" Relationship="Self.FK__DetallesP__Juego__571DF1D5" FromRole="DetallesPedidos" ToRole="Juegos" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__DetallesP__Pedid__5629CD9C" FromRole="DetallesPedidos" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Errores">
+          <Key>
+            <PropertyRef Name="ErrorID" />
+          </Key>
+          <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mensaje" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Juegos">
+          <Key>
+            <PropertyRef Name="JuegoID" />
+          </Key>
+          <Property Name="JuegoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Genero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaLanzamiento" Type="DateTime" Precision="0" />
+          <Property Name="ConsolaID" Type="Int32" />
+          <NavigationProperty Name="Consolas" Relationship="Self.FK__Juegos__ConsolaI__4D94879B" FromRole="Juegos" ToRole="Consolas" />
+          <NavigationProperty Name="DetallesPedidos" Relationship="Self.FK__DetallesP__Juego__571DF1D5" FromRole="Juegos" ToRole="DetallesPedidos" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="PedidoID" />
+          </Key>
+          <Property Name="PedidoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteID" Type="Int32" />
+          <Property Name="FechaPedido" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Pedidos__Cliente__534D60F1" FromRole="Pedidos" ToRole="Clientes" />
+          <NavigationProperty Name="DetallesPedidos" Relationship="Self.FK__DetallesP__Pedid__5629CD9C" FromRole="Pedidos" ToRole="DetallesPedidos" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__RolID__5070F446" FromRole="Roles" ToRole="Clientes" />
+        </EntityType>
+        <Association Name="FK__Clientes__RolID__5070F446">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__Cliente__534D60F1">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Juegos__ConsolaI__4D94879B">
+          <End Role="Consolas" Type="Self.Consolas" Multiplicity="0..1" />
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consolas">
+              <PropertyRef Name="ConsolaID" />
+            </Principal>
+            <Dependent Role="Juegos">
+              <PropertyRef Name="ConsolaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesP__Juego__571DF1D5">
+          <End Role="Juegos" Type="Self.Juegos" Multiplicity="0..1" />
+          <End Role="DetallesPedidos" Type="Self.DetallesPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Juegos">
+              <PropertyRef Name="JuegoID" />
+            </Principal>
+            <Dependent Role="DetallesPedidos">
+              <PropertyRef Name="JuegoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesP__Pedid__5629CD9C">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="0..1" />
+          <End Role="DetallesPedidos" Type="Self.DetallesPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="PedidoID" />
+            </Principal>
+            <Dependent Role="DetallesPedidos">
+              <PropertyRef Name="PedidoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArcadeXEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Consolas" EntityType="Self.Consolas" />
+          <EntitySet Name="DetallesPedidos" EntityType="Self.DetallesPedidos" />
+          <EntitySet Name="Errores" EntityType="Self.Errores" />
+          <EntitySet Name="Juegos" EntityType="Self.Juegos" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <AssociationSet Name="FK__Clientes__RolID__5070F446" Association="Self.FK__Clientes__RolID__5070F446">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__Cliente__534D60F1" Association="Self.FK__Pedidos__Cliente__534D60F1">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Juegos__ConsolaI__4D94879B" Association="Self.FK__Juegos__ConsolaI__4D94879B">
+            <End Role="Consolas" EntitySet="Consolas" />
+            <End Role="Juegos" EntitySet="Juegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesP__Juego__571DF1D5" Association="Self.FK__DetallesP__Juego__571DF1D5">
+            <End Role="Juegos" EntitySet="Juegos" />
+            <End Role="DetallesPedidos" EntitySet="DetallesPedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesP__Pedid__5629CD9C" Association="Self.FK__DetallesP__Pedid__5629CD9C">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="DetallesPedidos" EntitySet="DetallesPedidos" />
+          </AssociationSet>
+          <FunctionImport Name="IniciarSesion" ReturnType="Collection(ArcadeXModel.IniciarSesion_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarCliente">
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+            <Parameter Name="RolID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="IniciarSesion_Result">
+          <Property Type="Int32" Name="ClienteID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="RolID" Nullable="true" />
+          <Property Type="String" Name="NombreRol" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ArcadeXModelStoreContainer" CdmEntityContainer="ArcadeXEntities1">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="ArcadeXModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consolas">
+            <EntityTypeMapping TypeName="ArcadeXModel.Consolas">
+              <MappingFragment StoreEntitySet="Consolas">
+                <ScalarProperty Name="ConsolaID" ColumnName="ConsolaID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+                <ScalarProperty Name="FechaLanzamiento" ColumnName="FechaLanzamiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallesPedidos">
+            <EntityTypeMapping TypeName="ArcadeXModel.DetallesPedidos">
+              <MappingFragment StoreEntitySet="DetallesPedidos">
+                <ScalarProperty Name="DetalleID" ColumnName="DetalleID" />
+                <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
+                <ScalarProperty Name="JuegoID" ColumnName="JuegoID" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Errores">
+            <EntityTypeMapping TypeName="ArcadeXModel.Errores">
+              <MappingFragment StoreEntitySet="Errores">
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Juegos">
+            <EntityTypeMapping TypeName="ArcadeXModel.Juegos">
+              <MappingFragment StoreEntitySet="Juegos">
+                <ScalarProperty Name="JuegoID" ColumnName="JuegoID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="FechaLanzamiento" ColumnName="FechaLanzamiento" />
+                <ScalarProperty Name="ConsolaID" ColumnName="ConsolaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidos">
+            <EntityTypeMapping TypeName="ArcadeXModel.Pedidos">
+              <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="FechaPedido" ColumnName="FechaPedido" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ArcadeXModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="IniciarSesion" FunctionName="ArcadeXModel.Store.IniciarSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ArcadeXModel.IniciarSesion_Result">
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarCliente" FunctionName="ArcadeXModel.Store.RegistrarCliente" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
