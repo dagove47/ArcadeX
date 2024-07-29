@@ -8,17 +8,17 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{81C84CDE-D8A2-4635-87D5-501E5529E769}</ProjectGuid>
+    <ProjectGuid>{EFE96E8E-0643-4685-BE7D-992EC4725F2D}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ArcadeX</RootNamespace>
-    <AssemblyName>ArcadeX</AssemblyName>
+    <RootNamespace>arcadeX</RootNamespace>
+    <AssemblyName>arcadeX</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44308</IISExpressSSLPort>
+    <IISExpressSSLPort>44362</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,13 +128,54 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="baseDatos\Consolas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="baseDatos\Errores.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="baseDatos\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="baseDatos\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="baseDatos\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="baseDatos\Roles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="baseDatos\Usuarios.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Entidades\Consola.cs" />
+    <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClienteModel.cs" />
+    <Compile Include="Models\ConsolaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="baseDatos\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="baseDatos\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -146,12 +195,135 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="root\dist\css\adminlte.css" />
+    <Content Include="root\dist\css\adminlte.min.css" />
+    <Content Include="root\dist\css\alt\adminlte.components.css" />
+    <Content Include="root\dist\css\alt\adminlte.components.min.css" />
+    <Content Include="root\dist\css\alt\adminlte.core.css" />
+    <Content Include="root\dist\css\alt\adminlte.core.min.css" />
+    <Content Include="root\dist\css\alt\adminlte.extra-components.css" />
+    <Content Include="root\dist\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="root\dist\css\alt\adminlte.pages.css" />
+    <Content Include="root\dist\css\alt\adminlte.pages.min.css" />
+    <Content Include="root\dist\css\alt\adminlte.plugins.css" />
+    <Content Include="root\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="root\dist\css\styles.css" />
+    <Content Include="root\dist\img\AdminLTELogo.png" />
+    <Content Include="root\dist\img\avatar.png" />
+    <Content Include="root\dist\img\avatar04.png" />
+    <Content Include="root\dist\img\avatar2.png" />
+    <Content Include="root\dist\img\avatar3.png" />
+    <Content Include="root\dist\img\avatar5.png" />
+    <Content Include="root\dist\img\boxed-bg.jpg" />
+    <Content Include="root\dist\img\boxed-bg.png" />
+    <Content Include="root\dist\img\credit\american-express.png" />
+    <Content Include="root\dist\img\credit\cirrus.png" />
+    <Content Include="root\dist\img\credit\mastercard.png" />
+    <Content Include="root\dist\img\credit\mestro.png" />
+    <Content Include="root\dist\img\credit\paypal.png" />
+    <Content Include="root\dist\img\credit\paypal2.png" />
+    <Content Include="root\dist\img\credit\visa.png" />
+    <Content Include="root\dist\img\default-150x150.png" />
+    <Content Include="root\dist\img\icons.png" />
+    <Content Include="root\dist\img\photo1.png" />
+    <Content Include="root\dist\img\photo2.png" />
+    <Content Include="root\dist\img\photo3.jpg" />
+    <Content Include="root\dist\img\photo4.jpg" />
+    <Content Include="root\dist\img\prod-1.jpg" />
+    <Content Include="root\dist\img\prod-2.jpg" />
+    <Content Include="root\dist\img\prod-3.jpg" />
+    <Content Include="root\dist\img\prod-4.jpg" />
+    <Content Include="root\dist\img\prod-5.jpg" />
+    <Content Include="root\dist\img\user1-128x128.jpg" />
+    <Content Include="root\dist\img\user2-160x160.jpg" />
+    <Content Include="root\dist\img\user3-128x128.jpg" />
+    <Content Include="root\dist\img\user4-128x128.jpg" />
+    <Content Include="root\dist\img\user5-128x128.jpg" />
+    <Content Include="root\dist\img\user6-128x128.jpg" />
+    <Content Include="root\dist\img\user7-128x128.jpg" />
+    <Content Include="root\dist\img\user8-128x128.jpg" />
+    <Content Include="root\dist\js\adminlte.js" />
+    <Content Include="root\dist\js\adminlte.min.js" />
+    <Content Include="root\dist\js\demo.js" />
+    <Content Include="root\dist\js\pages\dashboard.js" />
+    <Content Include="root\dist\js\pages\dashboard2.js" />
+    <Content Include="root\dist\js\pages\dashboard3.js" />
+    <Content Include="root\funciones\Existe.js" />
+    <Content Include="root\funciones\Vendedor.js" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.js" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="root\plugins\fontawesome-free\css\all.css" />
+    <Content Include="root\plugins\fontawesome-free\css\all.min.css" />
+    <Content Include="root\plugins\fontawesome-free\css\brands.css" />
+    <Content Include="root\plugins\fontawesome-free\css\brands.min.css" />
+    <Content Include="root\plugins\fontawesome-free\css\fontawesome.css" />
+    <Content Include="root\plugins\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="root\plugins\fontawesome-free\css\regular.css" />
+    <Content Include="root\plugins\fontawesome-free\css\regular.min.css" />
+    <Content Include="root\plugins\fontawesome-free\css\solid.css" />
+    <Content Include="root\plugins\fontawesome-free\css\solid.min.css" />
+    <Content Include="root\plugins\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="root\plugins\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="root\plugins\fontawesome-free\css\v4-shims.css" />
+    <Content Include="root\plugins\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="root\plugins\icheck-bootstrap\icheck-bootstrap.css" />
+    <Content Include="root\plugins\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="root\plugins\jquery\core.js" />
+    <Content Include="root\plugins\jquery\jquery.js" />
+    <Content Include="root\plugins\jquery\jquery.min.js" />
+    <Content Include="root\plugins\jquery\jquery.slim.js" />
+    <Content Include="root\plugins\jquery\jquery.slim.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="root\dist\css\adminlte.css.map" />
+    <Content Include="root\dist\css\adminlte.min.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.components.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.components.min.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.core.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.core.min.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.pages.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.plugins.css.map" />
+    <Content Include="root\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="root\dist\js\adminlte.js.map" />
+    <Content Include="root\dist\js\adminlte.min.js.map" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.js.map" />
+    <Content Include="root\plugins\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="root\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="root\plugins\icheck-bootstrap\LICENSE" />
+    <Content Include="root\plugins\jquery\jquery.min.map" />
+    <Content Include="root\plugins\jquery\jquery.slim.min.map" />
+    <EntityDeploy Include="baseDatos\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="baseDatos\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -174,13 +346,17 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\RegistroCliente.cshtml" />
+    <Content Include="Views\Home\RegistroConsolas.cshtml" />
+    <Content Include="Views\Home\ConsultaUsuarios.cshtml" />
+    <Content Include="Views\Home\ConsultaJuegos.cshtml" />
+    <Content Include="Views\Home\Consolas.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Consolas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -209,6 +385,9 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -225,9 +404,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50953</DevelopmentServerPort>
+          <DevelopmentServerPort>53355</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44308/</IISUrl>
+          <IISUrl>https://localhost:44362/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -239,7 +418,7 @@
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>

@@ -1,0 +1,73 @@
+﻿@model arcadeX.Entidades.Consola
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Registro de Consolas";
+}
+
+<div class="card">
+    <div class="card-body register-card-body">
+        <p class="login-box-msg">Registro de Consola</p>
+
+        @if (ViewBag.msj != null)
+        {
+            <div class="alert alert-info" role="alert" style="text-align:center">
+                @ViewBag.msj
+            </div>
+        }
+
+        @using (Html.BeginForm("RegistroConsolas", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="input-group mb-3">
+                @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-gamepad"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                @Html.TextBoxFor(m => m.Marca, new { @type = "text", @class = "form-control", @placeholder = "Marca" })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-tag"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                @Html.TextBoxFor(m => m.FechaLanzamiento, new { @type = "date", @class = "form-control", @placeholder = "Fecha de Lanzamiento" })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-calendar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                @Html.TextBoxFor(m => m.Precio, new { @type = "number", @class = "form-control", @placeholder = "Precio", step = "0.01" })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-dollar-sign"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="file" name="Imagen" class="form-control" placeholder="Imagen" />
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-image"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                </div>
+            </div>
+        }
+
+        <a href="@Url.Action("Index","Home")" class="text-center">Volver</a>
+    </div>
+</div>
