@@ -11,7 +11,7 @@ namespace arcadeX.Controllers
     public class HomeController : Controller
     {
         UsuarioModel usuarioM = new UsuarioModel();
-        ConsolaModel consolaM = new ConsolaModel();
+    
 
         public ActionResult Index()
         {
@@ -19,13 +19,13 @@ namespace arcadeX.Controllers
         }
 
         [HttpGet]
-        public ActionResult RegistroCliente()
+        public ActionResult RegistroUsuario()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult RegistroCliente(Usuario user)
+        public ActionResult RegistroUsuario(Usuario user)
         {
             var respuesta = usuarioM.RegistrarCliente(user);
             if (respuesta)
@@ -39,50 +39,7 @@ namespace arcadeX.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult RegistroConsolas()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult RegistroConsolas(Consola consola, HttpPostedFileBase Imagen)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    if (Imagen != null && Imagen.ContentLength > 0)
-                    {
-                        using (var reader = new BinaryReader(Imagen.InputStream))
-                        {
-                            consola.Imagen = reader.ReadBytes(Imagen.ContentLength);
-                        }
-                    }
-
-                    var respuesta = consolaM.RegistrarConsola(consola);
-                    if (respuesta)
-                    {
-                        ViewBag.msj = "Consola registrada exitosamente.";
-                    }
-                    else
-                    {
-                        ViewBag.msj = "Error al registrar la consola.";
-                    }
-                }
-                else
-                {
-                    ViewBag.msj = "Hay errores en el formulario.";
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log the exception (consider using a logging framework)
-                ViewBag.msj = "Ocurrió un error: " + ex.Message;
-            }
-
-            return View(consola);
-        }
+   
 
         public ActionResult ConsultaJuegos()
         {
