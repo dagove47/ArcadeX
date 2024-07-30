@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Game";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+
+<main class="gameInfo-main">
+    <section class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="https://www.freetogame.com/g/452/Call-of-Duty-Warzone-1.jpg" 
+                 class="d-block mx-lg-auto img-fluid heroImage" alt="..." width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-5 mainColor" data-name>Call Of Duty: Warzone</h1>
+            <div class="gameInfo-feature col">
+                Genero: &nbsp;<p class="gameInfo-feature-text" data-genre>Shooter</p>
+            </div>
+            <div class="gameInfo-feature col">
+                Plataforma: &nbsp;<p class="gameInfo-feature-text" data-platform>Windows</p>
+            </div>
+            <div class="gameInfo-feature col">
+                Compañía: &nbsp;<p class="gameInfo-feature-text" data-publisher>Activision</p>
+            </div>
+            <div class="gameInfo-feature col">
+                Lanzamiento: &nbsp;<p class="gameInfo-feature-text" data-release>2020-03-10</p>
+            </div>
+            <p class="lead heroText mt-3" data-description>
+                A standalone free-to-play battle royale and modes accessible via Call of Duty: Modern Warfare.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-5">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Comprar</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Guardar</button>
+            </div>
+        </div>
+    </section>
+</main>
+

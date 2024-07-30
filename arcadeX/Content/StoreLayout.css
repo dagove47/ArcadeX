@@ -116,6 +116,22 @@ body {
     display: none;
 }
 
+/* Game Info */
+
+.gameInfo-main {
+    min-height: 80vh;
+    display: flex;
+}
+
+.gameInfo-feature {
+    display: flex;
+    color: #b2df28;
+}
+
+.gameInfo-feature-text {
+    color: #fff;
+}
+
 /* custom.css */
 .footer {
     background-color: red; /* Same as bg-dark */

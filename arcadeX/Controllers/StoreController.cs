@@ -13,5 +13,11 @@ namespace arcadeX.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Game()
+        {
+            return View();
+        }
     }
 }
