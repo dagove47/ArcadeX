@@ -10,12 +10,10 @@
 namespace arcadeX.baseDatos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Errores
+    public partial class IniciarSesion_Result
     {
-        public int ErrorID { get; set; }
-        public string Mensaje { get; set; }
-        public Nullable<System.DateTime> FechaHora { get; set; }
+        public Nullable<int> UsuarioID { get; set; }
+        public Nullable<int> RolID { get; set; }
     }
 }

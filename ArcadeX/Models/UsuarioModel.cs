@@ -1,26 +1,25 @@
 ﻿using arcadeX.baseDatos;
 using arcadeX.Entidades;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace arcadeX.Models
 {
-    public class ClienteModel
+    public class UsuarioModel
     {
-        public bool RegistrarCliente(Cliente user)
+        public bool RegistrarCliente(Usuario user)
         {
-            if (ExisteCorreo(user.Correo))
+            if (ExisteCorreo(user.Email))
             {
-                return false; // el correo ya existe
+                return false; // El correo ya existe
             }
 
             try
             {
                 using (var context = new ArcadeXEntities())
                 {
-                    var result = context.sp_RegistrarUsuario(user.Identificacion, user.Nombre, user.Correo, user.Contrasena, user.RolID);
+                    // Llamar al procedimiento almacenado para registrar el usuario
+                    var result = context.RegistrarUsuario(user.Identificacion, user.Nombre, user.Email, user.Contrasena, user.RolID);
                     return result > 0;
                 }
             }
@@ -33,13 +32,12 @@ namespace arcadeX.Models
             }
         }
 
-        private bool ExisteCorreo(string correo)
+        private bool ExisteCorreo(string email)
         {
             using (var context = new ArcadeXEntities())
             {
-                return context.Usuarios.Any(c => c.Correo == correo);
+                return context.Usuarios.Any(u => u.Email == email);
             }
         }
     }
 }
-

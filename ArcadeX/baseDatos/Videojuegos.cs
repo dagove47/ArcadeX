@@ -12,10 +12,16 @@ namespace arcadeX.baseDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Errores
+    public partial class Videojuegos
     {
-        public int ErrorID { get; set; }
-        public string Mensaje { get; set; }
-        public Nullable<System.DateTime> FechaHora { get; set; }
+        public int VideojuegoID { get; set; }
+        public string Titulo { get; set; }
+        public string Desarrollador { get; set; }
+        public Nullable<System.DateTime> FechaLanzamiento { get; set; }
+        public string Genero { get; set; }
+        public Nullable<decimal> Precio { get; set; }
+        public int ConsolaID { get; set; }
+    
+        public virtual Consolas Consolas { get; set; }
     }
 }

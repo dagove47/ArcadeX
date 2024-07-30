@@ -14,12 +14,12 @@ namespace arcadeX.baseDatos
     
     public partial class Usuarios
     {
-        public int Consecutivo { get; set; }
+        public int UsuarioID { get; set; }
         public string Identificacion { get; set; }
         public string Nombre { get; set; }
-        public string Correo { get; set; }
-        public string Contrasena { get; set; }
-        public Nullable<int> RolID { get; set; }
+        public string Email { get; set; }
+        public string Contrasenna { get; set; }
+        public int RolID { get; set; }
     
         public virtual Roles Roles { get; set; }
     }

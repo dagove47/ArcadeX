@@ -1,7 +1,6 @@
 ﻿using arcadeX.Entidades;
 using arcadeX.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -11,8 +10,9 @@ namespace arcadeX.Controllers
 {
     public class HomeController : Controller
     {
-        ClienteModel clienteM = new ClienteModel();
+        UsuarioModel usuarioM = new UsuarioModel();
         ConsolaModel consolaM = new ConsolaModel();
+
         public ActionResult Index()
         {
             return View();
@@ -21,14 +21,13 @@ namespace arcadeX.Controllers
         [HttpGet]
         public ActionResult RegistroCliente()
         {
-
             return View();
         }
 
         [HttpPost]
-        public ActionResult RegistroCliente(Cliente user)
+        public ActionResult RegistroCliente(Usuario user)
         {
-            var respuesta = clienteM.RegistrarCliente(user);
+            var respuesta = usuarioM.RegistrarCliente(user);
             if (respuesta)
             {
                 return RedirectToAction("Index", "Home");
@@ -39,6 +38,7 @@ namespace arcadeX.Controllers
                 return View();
             }
         }
+
         [HttpGet]
         public ActionResult RegistroConsolas()
         {
@@ -84,17 +84,18 @@ namespace arcadeX.Controllers
             return View(consola);
         }
 
-
-
-        public ActionResult ConsultaJuegos() {
+        public ActionResult ConsultaJuegos()
+        {
             return View();
         }
 
-        public ActionResult Consolas() {
+        public ActionResult Consolas()
+        {
             return View();
         }
 
-        public ActionResult ConsultaUsuarios() {
+        public ActionResult ConsultaUsuarios()
+        {
             return View();
         }
     }

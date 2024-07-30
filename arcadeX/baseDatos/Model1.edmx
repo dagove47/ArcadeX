@@ -4,28 +4,24 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ArcadeXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ArcadeXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Consolas">
           <Key>
             <PropertyRef Name="ConsolaID" />
           </Key>
           <Property Name="ConsolaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Marca" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Modelo" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="FechaLanzamiento" Type="date" Nullable="false" />
-          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="Fabricante" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaLanzamiento" Type="date" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Errores">
           <Key>
             <PropertyRef Name="ErrorID" />
           </Key>
           <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ErrorMensaje" Type="nvarchar" MaxLength="4000" />
-          <Property Name="ErrorSeveridad" Type="int" />
-          <Property Name="ErrorEstado" Type="int" />
-          <Property Name="ErrorFecha" Type="datetime" />
+          <Property Name="Mensaje" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -36,17 +32,29 @@
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
-            <PropertyRef Name="Consecutivo" />
+            <PropertyRef Name="UsuarioID" />
           </Key>
-          <Property Name="Consecutivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Identificacion" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificacion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Correo" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Contrasena" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="RolID" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasenna" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Usuarios_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+        <EntityType Name="Videojuegos">
+          <Key>
+            <PropertyRef Name="VideojuegoID" />
+          </Key>
+          <Property Name="VideojuegoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Desarrollador" Type="nvarchar" MaxLength="100" />
+          <Property Name="FechaLanzamiento" Type="date" />
+          <Property Name="Genero" Type="nvarchar" MaxLength="50" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ConsolaID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Usuarios__RolID__44FF419A">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -57,18 +65,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_RegistrarConsola" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
-          <Parameter Name="Marca" Type="nvarchar" Mode="In" />
-          <Parameter Name="FechaLanzamiento" Type="datetime" Mode="In" />
-          <Parameter Name="Precio" Type="decimal" Mode="In" />
-          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+        <Association Name="FK__Videojueg__Conso__49C3F6B7">
+          <End Role="Consolas" Type="Self.Consolas" Multiplicity="1" />
+          <End Role="Videojuegos" Type="Self.Videojuegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consolas">
+              <PropertyRef Name="ConsolaID" />
+            </Principal>
+            <Dependent Role="Videojuegos">
+              <PropertyRef Name="ConsolaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Identificacion" Type="nvarchar" Mode="In" />
           <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
-          <Parameter Name="Correo" Type="nvarchar" Mode="In" />
-          <Parameter Name="Contrasena" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="nvarchar" Mode="In" />
           <Parameter Name="RolID" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="ArcadeXModelStoreContainer">
@@ -76,12 +93,18 @@
           <EntitySet Name="Errores" EntityType="Self.Errores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+          <EntitySet Name="Videojuegos" EntityType="Self.Videojuegos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Usuarios__RolID__44FF419A" Association="Self.FK__Usuarios__RolID__44FF419A">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
+          <AssociationSet Name="FK__Videojueg__Conso__49C3F6B7" Association="Self.FK__Videojueg__Conso__49C3F6B7">
+            <End Role="Consolas" EntitySet="Consolas" />
+            <End Role="Videojuegos" EntitySet="Videojuegos" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ArcadeXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -91,21 +114,18 @@
           </Key>
           <Property Name="ConsolaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Marca" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FechaLanzamiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Fabricante" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaLanzamiento" Type="DateTime" Precision="0" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Videojuegos" Relationship="Self.FK__Videojueg__Conso__49C3F6B7" FromRole="Consolas" ToRole="Videojuegos" />
         </EntityType>
         <EntityType Name="Errores">
           <Key>
             <PropertyRef Name="ErrorID" />
           </Key>
           <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ErrorMensaje" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="ErrorSeveridad" Type="Int32" />
-          <Property Name="ErrorEstado" Type="Int32" />
-          <Property Name="ErrorFecha" Type="DateTime" Precision="3" />
+          <Property Name="Mensaje" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -113,22 +133,47 @@
           </Key>
           <Property Name="RolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Roles" FromRole="Roles" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__RolID__44FF419A" FromRole="Roles" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
-            <PropertyRef Name="Consecutivo" />
+            <PropertyRef Name="UsuarioID" />
           </Key>
-          <Property Name="Consecutivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Contrasena" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RolID" Type="Int32" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasenna" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__RolID__44FF419A" FromRole="Usuarios" ToRole="Roles" />
         </EntityType>
-        <Association Name="FK_Usuarios_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+        <EntityType Name="Videojuegos">
+          <Key>
+            <PropertyRef Name="VideojuegoID" />
+          </Key>
+          <Property Name="VideojuegoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Desarrollador" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaLanzamiento" Type="DateTime" Precision="0" />
+          <Property Name="Genero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ConsolaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Consolas" Relationship="Self.FK__Videojueg__Conso__49C3F6B7" FromRole="Videojuegos" ToRole="Consolas" />
+        </EntityType>
+        <Association Name="FK__Videojueg__Conso__49C3F6B7">
+          <End Role="Consolas" Type="Self.Consolas" Multiplicity="1" />
+          <End Role="Videojuegos" Type="Self.Videojuegos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consolas">
+              <PropertyRef Name="ConsolaID" />
+            </Principal>
+            <Dependent Role="Videojuegos">
+              <PropertyRef Name="ConsolaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__RolID__44FF419A">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -144,25 +189,31 @@
           <EntitySet Name="Errores" EntityType="Self.Errores" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+          <EntitySet Name="Videojuegos" EntityType="Self.Videojuegos" />
+          <AssociationSet Name="FK__Videojueg__Conso__49C3F6B7" Association="Self.FK__Videojueg__Conso__49C3F6B7">
+            <End Role="Consolas" EntitySet="Consolas" />
+            <End Role="Videojuegos" EntitySet="Videojuegos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__RolID__44FF419A" Association="Self.FK__Usuarios__RolID__44FF419A">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
-          <FunctionImport Name="sp_RegistrarUsuario">
+          <FunctionImport Name="IniciarSesion" ReturnType="Collection(ArcadeXModel.IniciarSesion_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarUsuario">
             <Parameter Name="Identificacion" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="Correo" Mode="In" Type="String" />
-            <Parameter Name="Contrasena" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
             <Parameter Name="RolID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_RegistrarConsola">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="Marca" Mode="In" Type="String" />
-            <Parameter Name="FechaLanzamiento" Mode="In" Type="DateTime" />
-            <Parameter Name="Precio" Mode="In" Type="Decimal" />
-            <Parameter Name="Imagen" Mode="In" Type="Binary" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="IniciarSesion_Result">
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+          <Property Type="Int32" Name="RolID" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -174,11 +225,9 @@
               <MappingFragment StoreEntitySet="Consolas">
                 <ScalarProperty Name="ConsolaID" ColumnName="ConsolaID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
                 <ScalarProperty Name="FechaLanzamiento" ColumnName="FechaLanzamiento" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -186,10 +235,8 @@
             <EntityTypeMapping TypeName="ArcadeXModel.Errores">
               <MappingFragment StoreEntitySet="Errores">
                 <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
-                <ScalarProperty Name="ErrorMensaje" ColumnName="ErrorMensaje" />
-                <ScalarProperty Name="ErrorSeveridad" ColumnName="ErrorSeveridad" />
-                <ScalarProperty Name="ErrorEstado" ColumnName="ErrorEstado" />
-                <ScalarProperty Name="ErrorFecha" ColumnName="ErrorFecha" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -204,17 +251,37 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="ArcadeXModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
                 <ScalarProperty Name="RolID" ColumnName="RolID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_RegistrarUsuario" FunctionName="ArcadeXModel.Store.sp_RegistrarUsuario" />
-          <FunctionImportMapping FunctionImportName="sp_RegistrarConsola" FunctionName="ArcadeXModel.Store.sp_RegistrarConsola" />
+          <EntitySetMapping Name="Videojuegos">
+            <EntityTypeMapping TypeName="ArcadeXModel.Videojuegos">
+              <MappingFragment StoreEntitySet="Videojuegos">
+                <ScalarProperty Name="VideojuegoID" ColumnName="VideojuegoID" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Desarrollador" ColumnName="Desarrollador" />
+                <ScalarProperty Name="FechaLanzamiento" ColumnName="FechaLanzamiento" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ConsolaID" ColumnName="ConsolaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="IniciarSesion" FunctionName="ArcadeXModel.Store.IniciarSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ArcadeXModel.IniciarSesion_Result">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="ArcadeXModel.Store.RegistrarUsuario" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

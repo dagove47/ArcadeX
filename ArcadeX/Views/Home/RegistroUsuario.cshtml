@@ -1,5 +1,4 @@
-﻿
-@model arcadeX.Entidades.Cliente
+﻿@model arcadeX.Entidades.Usuario
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,7 +16,7 @@
             </div>
         }
 
-        @using (Html.BeginForm("index", "Home"))
+        @using (Html.BeginForm("RegistroCliente", "Home"))
         {
             <div class="input-group mb-3">
                 @Html.TextBoxFor(m => m.Identificacion, new
@@ -34,7 +33,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre", })
+                @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-user"></span>
@@ -42,7 +41,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                @Html.TextBoxFor(m => m.Correo, new { @type = "email", @class = "form-control", @placeholder = "Correo Electrónico" })
+                @Html.TextBoxFor(m => m.Email, new { @type = "email", @class = "form-control", @placeholder = "Correo Electrónico" })
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -50,7 +49,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                @Html.TextBoxFor(m => m.Contrasena, new { @type = "password", @class = "form-control", @placeholder = "Contraseña" })
+                @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", @placeholder = "Contraseña" })
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -66,7 +65,7 @@
             </div>
         }
 
-        <a href="@Url.Action("Index","Home")" class="text-center">Iniciar Sesión</a>
+        <a href="@Url.Action("Index", "Home")" class="text-center">Iniciar Sesión</a>
     </div>
 </div>
 

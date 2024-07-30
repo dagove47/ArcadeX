@@ -5,11 +5,11 @@ using System.Web;
 
 namespace arcadeX.Entidades
 {
-    public class Cliente
+    public class Usuario
     {
         public String Identificacion { get; set; }
         public String Nombre { get; set; }
-        public String Correo { get; set; }
+        public String Email { get; set; }
         public String Contrasena { get; set; }
         public int RolID { get; set; }
     }
