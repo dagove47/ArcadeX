@@ -53,7 +53,7 @@
           <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
           <Property Name="ConsolaID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Usuarios__RolID__44FF419A">
+        <Association Name="FK__Usuarios__RolID__398D8EEE">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -65,7 +65,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Videojueg__Conso__49C3F6B7">
+        <Association Name="FK__Videojueg__Conso__3E52440B">
           <End Role="Consolas" Type="Self.Consolas" Multiplicity="1" />
           <End Role="Videojuegos" Type="Self.Videojuegos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -77,9 +77,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ConsultarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
           <Parameter Name="Contrasenna" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="RegistrarConsola" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fabricante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaLanzamiento" Type="date" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
         </Function>
         <Function Name="RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Identificacion" Type="nvarchar" Mode="In" />
@@ -94,11 +101,11 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Videojuegos" EntityType="Self.Videojuegos" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Usuarios__RolID__44FF419A" Association="Self.FK__Usuarios__RolID__44FF419A">
+          <AssociationSet Name="FK__Usuarios__RolID__398D8EEE" Association="Self.FK__Usuarios__RolID__398D8EEE">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="FK__Videojueg__Conso__49C3F6B7" Association="Self.FK__Videojueg__Conso__49C3F6B7">
+          <AssociationSet Name="FK__Videojueg__Conso__3E52440B" Association="Self.FK__Videojueg__Conso__3E52440B">
             <End Role="Consolas" EntitySet="Consolas" />
             <End Role="Videojuegos" EntitySet="Videojuegos" />
           </AssociationSet>
@@ -117,7 +124,7 @@
           <Property Name="Fabricante" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FechaLanzamiento" Type="DateTime" Precision="0" />
           <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="Videojuegos" Relationship="Self.FK__Videojueg__Conso__49C3F6B7" FromRole="Consolas" ToRole="Videojuegos" />
+          <NavigationProperty Name="Videojuegos" Relationship="Self.FK__Videojueg__Conso__3E52440B" FromRole="Consolas" ToRole="Videojuegos" />
         </EntityType>
         <EntityType Name="Errores">
           <Key>
@@ -133,7 +140,7 @@
           </Key>
           <Property Name="RolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__RolID__44FF419A" FromRole="Roles" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__RolID__398D8EEE" FromRole="Roles" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -145,7 +152,7 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Contrasenna" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RolID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__RolID__44FF419A" FromRole="Usuarios" ToRole="Roles" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__RolID__398D8EEE" FromRole="Usuarios" ToRole="Roles" />
         </EntityType>
         <EntityType Name="Videojuegos">
           <Key>
@@ -158,9 +165,9 @@
           <Property Name="Genero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="ConsolaID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Consolas" Relationship="Self.FK__Videojueg__Conso__49C3F6B7" FromRole="Videojuegos" ToRole="Consolas" />
+          <NavigationProperty Name="Consolas" Relationship="Self.FK__Videojueg__Conso__3E52440B" FromRole="Videojuegos" ToRole="Consolas" />
         </EntityType>
-        <Association Name="FK__Videojueg__Conso__49C3F6B7">
+        <Association Name="FK__Videojueg__Conso__3E52440B">
           <End Role="Consolas" Type="Self.Consolas" Multiplicity="1" />
           <End Role="Videojuegos" Type="Self.Videojuegos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -172,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuarios__RolID__44FF419A">
+        <Association Name="FK__Usuarios__RolID__398D8EEE">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,17 +197,24 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
           <EntitySet Name="Videojuegos" EntityType="Self.Videojuegos" />
-          <AssociationSet Name="FK__Videojueg__Conso__49C3F6B7" Association="Self.FK__Videojueg__Conso__49C3F6B7">
+          <AssociationSet Name="FK__Videojueg__Conso__3E52440B" Association="Self.FK__Videojueg__Conso__3E52440B">
             <End Role="Consolas" EntitySet="Consolas" />
             <End Role="Videojuegos" EntitySet="Videojuegos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuarios__RolID__44FF419A" Association="Self.FK__Usuarios__RolID__44FF419A">
+          <AssociationSet Name="FK__Usuarios__RolID__398D8EEE" Association="Self.FK__Usuarios__RolID__398D8EEE">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
+          <FunctionImport Name="ConsultarUsuarios" ReturnType="Collection(ArcadeXModel.ConsultarUsuarios_Result)" />
           <FunctionImport Name="IniciarSesion" ReturnType="Collection(ArcadeXModel.IniciarSesion_Result)">
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarConsola">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Fabricante" Mode="In" Type="String" />
+            <Parameter Name="FechaLanzamiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="RegistrarUsuario">
             <Parameter Name="Identificacion" Mode="In" Type="String" />
@@ -210,9 +224,19 @@
             <Parameter Name="RolID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="ConsultarUsuarios_Result">
+          <Property Type="Int32" Name="UsuarioID" Nullable="false" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Rol" Nullable="false" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="IniciarSesion_Result">
-          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
-          <Property Type="Int32" Name="RolID" Nullable="true" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="false" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="RolID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -273,14 +297,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarUsuarios" FunctionName="ArcadeXModel.Store.ConsultarUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ArcadeXModel.ConsultarUsuarios_Result">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="IniciarSesion" FunctionName="ArcadeXModel.Store.IniciarSesion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ArcadeXModel.IniciarSesion_Result">
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="RolID" ColumnName="RolID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarConsola" FunctionName="ArcadeXModel.Store.RegistrarConsola" />
           <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="ArcadeXModel.Store.RegistrarUsuario" />
         </EntityContainerMapping>
       </Mapping>

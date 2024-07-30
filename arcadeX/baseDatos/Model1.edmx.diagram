@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fc05364906184458aa53d011f4aa9db6" Name="Diagram1">
+      <Diagram DiagramId="3c3e0d720bc248a3bbcd3d22ae365e57" Name="Diagram1">
         <EntityTypeShape EntityType="ArcadeXModel.Consolas" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ArcadeXModel.Errores" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArcadeXModel.Roles" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ArcadeXModel.Usuarios" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ArcadeXModel.Videojuegos" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="ArcadeXModel.FK__Videojueg__Conso__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="ArcadeXModel.FK__Usuarios__RolID__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="ArcadeXModel.FK__Videojueg__Conso__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="ArcadeXModel.FK__Usuarios__RolID__398D8EEE" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

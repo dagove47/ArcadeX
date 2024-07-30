@@ -2,12 +2,12 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Registro";
+    ViewBag.Title = "RegistroUsuario";
 }
 
 <div class="card">
-    <div class="card-body register-card-body">
-        <p class="login-box-msg">Registro</p>
+    <div class="card-body login-card-body">
+        <p class="login-box-msg">Registrar Usuario</p>
 
         @if (ViewBag.msj != null)
         {
@@ -19,16 +19,10 @@
         @using (Html.BeginForm("RegistroUsuario", "Home"))
         {
             <div class="input-group mb-3">
-                @Html.TextBoxFor(m => m.Identificacion, new
-                {
-                    @type = "text",
-                    @class = "form-control",
-                    @placeholder = "Identificación",
-                    onkeyup = "ConsultarIdentificacion();"
-                })
+                @Html.TextBoxFor(m => m.Identificacion, new { @type = "text", @class = "form-control", @placeholder = "Cedula" })
                 <div class="input-group-append">
                     <div class="input-group-text">
-                        <span class="fas fa-user"></span>
+                        <span class="fas fa-id-card"></span>
                     </div>
                 </div>
             </div>
@@ -56,6 +50,14 @@
                     </div>
                 </div>
             </div>
+            <div class="input-group mb-3">
+                @Html.DropDownListFor(m => m.RolID, new SelectList(ViewBag.Roles, "RolID", "Nombre"), new { @class = "form-control" })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user-tag"></span>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-8">
                 </div>
@@ -64,9 +66,5 @@
                 </div>
             </div>
         }
-
-        <a href="@Url.Action("Index", "Home")" class="text-center">Iniciar Sesión</a>
     </div>
 </div>
-
-<script src="~/root/funciones/Existe.js"></script>

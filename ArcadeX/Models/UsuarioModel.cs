@@ -1,35 +1,27 @@
-﻿using arcadeX.baseDatos;
-using arcadeX.Entidades;
-using System;
+﻿using arcadeX.Entidades;
+using arcadeX.baseDatos;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace arcadeX.Models
 {
     public class UsuarioModel
     {
-        public bool RegistrarCliente(Usuario user)
+        public bool RegistrarUsuario(Usuario user)
         {
             if (ExisteCorreo(user.Email))
             {
                 return false; // El correo ya existe
             }
 
-            try
+            var rowsAffected = 0;
+
+            using (var context = new ArcadeXEntities())
             {
-                using (var context = new ArcadeXEntities())
-                {
-                    // Llamar al procedimiento almacenado para registrar el usuario
-                    var result = context.RegistrarUsuario(user.Identificacion, user.Nombre, user.Email, user.Contrasena, user.RolID);
-                    return result > 0;
-                }
+                rowsAffected = context.RegistrarUsuario(user.Identificacion, user.Nombre, user.Email, user.Contrasena, user.RolID);
             }
-            catch (Exception ex)
-            {
-                // Manejar el error si es necesario
-                // Podrías registrar el error en la base de datos o en un archivo de log
-                Console.WriteLine(ex.Message);
-                return false;
-            }
+
+            return rowsAffected > 0;
         }
 
         private bool ExisteCorreo(string email)
@@ -37,6 +29,22 @@ namespace arcadeX.Models
             using (var context = new ArcadeXEntities())
             {
                 return context.Usuarios.Any(u => u.Email == email);
+            }
+        }
+
+        public List<Consulta> Consultar()
+        {
+            using (var context = new ArcadeXEntities())
+            {
+                var result = context.ConsultarUsuarios().Select(u => new Consulta
+                {
+                    Identificacion = u.Identificacion,
+                    Nombre = u.Nombre,
+                    Email = u.Email,
+                    UsuarioID = u.UsuarioID
+                }).ToList();
+
+                return result;
             }
         }
     }

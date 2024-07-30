@@ -11,12 +11,12 @@ namespace arcadeX.baseDatos
 {
     using System;
     
-    public partial class IniciarSesion_Result
+    public partial class ConsultarUsuarios_Result
     {
         public int UsuarioID { get; set; }
         public string Identificacion { get; set; }
         public string Nombre { get; set; }
         public string Email { get; set; }
-        public int RolID { get; set; }
+        public string Rol { get; set; }
     }
 }

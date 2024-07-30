@@ -1,7 +1,42 @@
-﻿
+﻿@model List<arcadeX.Entidades.Consulta>
+
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "ConsultaUsuarios";
 }
 
-<h2>ConsultaUsuarios</h2>
+<h2>Lista de Usuarios</h2>
 
+<table id="tablaUsuarios" class="table table-bordered"> tablaUsuarios
+    <thead>
+        <tr>
+            <th>Identificación</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>UsuarioID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.Identificacion</td>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.Email</td>
+                <td>@usuario.UsuarioID</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/root/plugins/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#tablaUsuarios").DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json'
+            }
+        });
+    })
+</script>

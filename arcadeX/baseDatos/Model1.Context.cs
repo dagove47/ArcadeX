@@ -33,6 +33,11 @@ namespace arcadeX.baseDatos
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Videojuegos> Videojuegos { get; set; }
     
+        public virtual ObjectResult<ConsultarUsuarios_Result> ConsultarUsuarios()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarUsuarios_Result>("ConsultarUsuarios");
+        }
+    
         public virtual ObjectResult<IniciarSesion_Result> IniciarSesion(string email, string contrasenna)
         {
             var emailParameter = email != null ?
@@ -44,6 +49,27 @@ namespace arcadeX.baseDatos
                 new ObjectParameter("Contrasenna", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IniciarSesion_Result>("IniciarSesion", emailParameter, contrasennaParameter);
+        }
+    
+        public virtual int RegistrarConsola(string nombre, string fabricante, Nullable<System.DateTime> fechaLanzamiento, Nullable<decimal> precio)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var fabricanteParameter = fabricante != null ?
+                new ObjectParameter("Fabricante", fabricante) :
+                new ObjectParameter("Fabricante", typeof(string));
+    
+            var fechaLanzamientoParameter = fechaLanzamiento.HasValue ?
+                new ObjectParameter("FechaLanzamiento", fechaLanzamiento) :
+                new ObjectParameter("FechaLanzamiento", typeof(System.DateTime));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("Precio", precio) :
+                new ObjectParameter("Precio", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarConsola", nombreParameter, fabricanteParameter, fechaLanzamientoParameter, precioParameter);
         }
     
         public virtual int RegistrarUsuario(string identificacion, string nombre, string email, string contrasenna, Nullable<int> rolID)
