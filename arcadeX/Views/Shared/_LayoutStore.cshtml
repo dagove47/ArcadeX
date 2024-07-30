@@ -1,0 +1,65 @@
+﻿﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/StoreLayout.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("ArcadeX", "HomePage", "Store", new { area = "" }, new { @class = "navbar-brand me-5 mainColor" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1 justify-content-end">
+                    <li>@Html.ActionLink("Inicio", "HomePage", "Store", new { area = "" }, new { @class = "nav-link ms-5" })</li>
+                    <li>@Html.ActionLink("Pedidos", "Pedidos", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
+                    <li>@Html.ActionLink("Contactenos", "Contactenos", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
+                    <li>@Html.ActionLink("Perfil", "Perfil", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="footer bg-dark text-white mt-5 py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>ArcadeX</h5>
+                    <p>&copy; @DateTime.Now.Year - ArcadeX</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li>@Html.ActionLink("Inicio", "HomePage", "Store", new { area = "" }, new { @class = "text-white" })</li>
+                        <li>@Html.ActionLink("Pedidos", "Pedidos", "Store", new { area = "" }, new { @class = "text-white" })</li>
+                        <li>@Html.ActionLink("Contactenos", "Contactenos", "Store", new { area = "" }, new { @class = "text-white" })</li>
+                        <li>@Html.ActionLink("Perfil", "Perfil", "Store", new { area = "" }, new { @class = "text-white" })</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p>123 Arcade St., Gametown</p>
+                    <p>Email: contact@arcadex.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

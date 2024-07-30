@@ -1,0 +1,142 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background-color: #131415;
+    color: #fff;
+    font-size: 16px;
+    font-family: "Varela Round", sans-serif;
+}
+
+.mainColor {
+    color: #bc13fe;
+}
+
+.heroImage {
+    border-radius: 10px;
+    box-shadow: 0 0 0.75em #bc13fe;
+}
+
+.heroText {
+    color: #ededed;
+}
+
+.homeIcons {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: linear-gradient(to bottom, #131415, #101112 33%, #101112 66%, #131415);
+}
+
+.homeIcons-box {
+    width: 200px;
+    text-align: center;
+}
+
+.homeIcons-circle {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    color: #bc13fe;
+}
+
+.homeIcons-title {
+    font-size: 25px;
+}
+
+
+.games-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    color: #fff;
+}
+
+.games-list-wrapper {
+    width: 1200px;
+    height: 100%;
+    margin: 16px;
+}
+
+.games-list-wrapper h2 {
+    color: #fff;
+}
+
+.games-list-wrapper div input {
+    box-shadow: 0 0 0.7em #00b5cc;
+    border-radius: 15px;
+}
+
+.card-title {
+    color: #fff;
+}
+
+.cards-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.cards-list .card {
+    margin: 16px;
+    box-shadow: 0 0 0.5em #00b5cc;
+    border-radius: 15px;
+}
+
+.cards-list .card img {
+    border-radius: 15px 15px 0 0;
+}
+
+.subtitle-card {
+    display: flex;
+    color: #b2df28;
+}
+
+.card-text {
+    color: #fff;
+}
+
+.hide {
+    display: none;
+}
+
+/* custom.css */
+.footer {
+    background-color: red; /* Same as bg-dark */
+    color: #ffffff; /* Light text for dark background */
+}
+
+.footer a {
+    color: #ffffff; /* Light text for links */
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #adb5bd; /* Lighter gray on hover */
+    text-decoration: underline;
+}
+
+.footer h5 {
+    margin-bottom: 1rem;
+}
+
+.footer .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}

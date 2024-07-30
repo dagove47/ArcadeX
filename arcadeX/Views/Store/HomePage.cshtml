@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+
+<main>
+    <section class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block mx-lg-auto img-fluid heroImage" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Explora <span class="mainColor">ArcadeX</span>  <br /> La mayor tienda de videojuegos</h1>
+            <p class="lead heroText">Descubre lo último en videojuegos, consolas y tecnología. Encuentra ofertas especiales en PS4, PS5, Xbox, Nintendo Switch y accesorios.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+            </div>
+        </div>
+    </section>
+    <section class="homeIcons" id="homeIcons">
+        <div class="homeIcons-box">
+            <div class="homeIcons-circle">
+                <i class="bi bi-controller"></i>
+            </div>
+            <div class="homeIcons-title mt-2"> Consolas</div>
+        </div>
+        <div class="homeIcons-box">
+            <div class="homeIcons-circle">
+                <i class="bi bi-stars"></i>
+            </div>
+            <div class="homeIcons-title mt-2"> Tecnología</div>
+        </div>
+        <div class="homeIcons-box">
+            <div class="homeIcons-circle">
+                <i class="bi bi-joystick"></i>
+            </div>
+            <div class="homeIcons-title mt-2"> Diversión</div>
+        </div>
+    </section>
+    <section class="games-wrapper" id="games-wrapper">
+        <div class="games-list-wrapper">
+            <h2>Videojuegos:</h2>
+            <div class="cards-list" id="cards-list" data-game-cards-container>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="https://www.freetogame.com/g/515/thumbnail.jpg" class="card-img-top" alt="game image" data-image>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-3" data-name>Nombre</h5>
+                        <div class="subtitle-card col">
+                            Genero: &nbsp;<p class="card-text" data-genre>Genero</p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Plataforma: &nbsp;<p class="card-text" data-platform>Plataforma</p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Compañía: &nbsp;<p class="card-text" data-developer>Compañía</p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Lanzamiento: &nbsp;<p class="card-text" data-release>01/01/2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="game image" data-image>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-3" data-name></h5>
+                        <div class="subtitle-card col">
+                            Species: &nbsp;<p class="card-text" data-species></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Gender: &nbsp;<p class="card-text" data-gender></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Location: &nbsp;<p class="card-text" data-location></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Status: &nbsp;<p class="card-text" data-status></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="game image" data-image>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-3" data-name></h5>
+                        <div class="subtitle-card col">
+                            Species: &nbsp;<p class="card-text" data-species></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Gender: &nbsp;<p class="card-text" data-gender></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Location: &nbsp;<p class="card-text" data-location></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Status: &nbsp;<p class="card-text" data-status></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="game image" data-image>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-3" data-name></h5>
+                        <div class="subtitle-card col">
+                            Species: &nbsp;<p class="card-text" data-species></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Gender: &nbsp;<p class="card-text" data-gender></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Location: &nbsp;<p class="card-text" data-location></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Status: &nbsp;<p class="card-text" data-status></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="game image" data-image>
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-3" data-name></h5>
+                        <div class="subtitle-card col">
+                            Species: &nbsp;<p class="card-text" data-species></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Gender: &nbsp;<p class="card-text" data-gender></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Location: &nbsp;<p class="card-text" data-location></p>
+                        </div>
+                        <div class="subtitle-card col">
+                            Status: &nbsp;<p class="card-text" data-status></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
