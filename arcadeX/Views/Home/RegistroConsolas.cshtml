@@ -16,7 +16,7 @@
             </div>
         }
 
-        @using (Html.BeginForm("RegistroConsolas", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Registrar", "Consolas", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="input-group mb-3">
                 @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })
@@ -26,11 +26,12 @@
                     </div>
                 </div>
             </div>
+
             <div class="input-group mb-3">
-                @Html.TextBoxFor(m => m.Marca, new { @type = "text", @class = "form-control", @placeholder = "Marca" })
+                @Html.TextBoxFor(m => m.Fabricante, new { @type = "text", @class = "form-control", @placeholder = "Fabricante" })
                 <div class="input-group-append">
                     <div class="input-group-text">
-                        <span class="fas fa-tag"></span>
+                        <span class="fas fa-industry"></span>
                     </div>
                 </div>
             </div>
@@ -43,6 +44,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="input-group mb-3">
                 @Html.TextBoxFor(m => m.Precio, new { @type = "number", @class = "form-control", @placeholder = "Precio", step = "0.01" })
                 <div class="input-group-append">
@@ -51,14 +53,16 @@
                     </div>
                 </div>
             </div>
+
             <div class="input-group mb-3">
-                <input type="file" name="Imagen" class="form-control" placeholder="Imagen" />
+                @Html.TextBoxFor(m => m.URLImagen, new { @type = "text", @class = "form-control", @placeholder = "URL de la Imagen" })
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-image"></span>
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-8">
                 </div>

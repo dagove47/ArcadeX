@@ -51,7 +51,7 @@ namespace arcadeX.baseDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IniciarSesion_Result>("IniciarSesion", emailParameter, contrasennaParameter);
         }
     
-        public virtual int RegistrarConsola(string nombre, string fabricante, Nullable<System.DateTime> fechaLanzamiento, Nullable<decimal> precio)
+        public virtual int RegistrarConsola(string nombre, string fabricante, Nullable<System.DateTime> fechaLanzamiento, Nullable<decimal> precio, string uRLImagen)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -69,7 +69,11 @@ namespace arcadeX.baseDatos
                 new ObjectParameter("Precio", precio) :
                 new ObjectParameter("Precio", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarConsola", nombreParameter, fabricanteParameter, fechaLanzamientoParameter, precioParameter);
+            var uRLImagenParameter = uRLImagen != null ?
+                new ObjectParameter("URLImagen", uRLImagen) :
+                new ObjectParameter("URLImagen", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarConsola", nombreParameter, fabricanteParameter, fechaLanzamientoParameter, precioParameter, uRLImagenParameter);
         }
     
         public virtual int RegistrarUsuario(string identificacion, string nombre, string email, string contrasenna, Nullable<int> rolID)
@@ -95,6 +99,11 @@ namespace arcadeX.baseDatos
                 new ObjectParameter("RolID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarUsuario", identificacionParameter, nombreParameter, emailParameter, contrasennaParameter, rolIDParameter);
+        }
+    
+        public virtual ObjectResult<ConsultarConsolas_Result> ConsultarConsolas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConsultarConsolas_Result>("ConsultarConsolas");
         }
     }
 }

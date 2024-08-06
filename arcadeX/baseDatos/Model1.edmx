@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ArcadeXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ArcadeXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Consolas">
           <Key>
             <PropertyRef Name="ConsolaID" />
@@ -14,6 +14,7 @@
           <Property Name="Fabricante" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="FechaLanzamiento" Type="date" />
           <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="URLImagen" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Errores">
           <Key>
@@ -77,6 +78,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ConsultarConsolas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ConsultarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
@@ -87,6 +89,7 @@
           <Parameter Name="Fabricante" Type="nvarchar" Mode="In" />
           <Parameter Name="FechaLanzamiento" Type="date" Mode="In" />
           <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="URLImagen" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Identificacion" Type="nvarchar" Mode="In" />
@@ -110,8 +113,7 @@
             <End Role="Videojuegos" EntitySet="Videojuegos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ArcadeXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -125,6 +127,7 @@
           <Property Name="FechaLanzamiento" Type="DateTime" Precision="0" />
           <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Videojuegos" Relationship="Self.FK__Videojueg__Conso__3E52440B" FromRole="Consolas" ToRole="Videojuegos" />
+          <Property Name="URLImagen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Errores">
           <Key>
@@ -215,6 +218,7 @@
             <Parameter Name="Fabricante" Mode="In" Type="String" />
             <Parameter Name="FechaLanzamiento" Mode="In" Type="DateTime" />
             <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="URLImagen" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="RegistrarUsuario">
             <Parameter Name="Identificacion" Mode="In" Type="String" />
@@ -223,6 +227,7 @@
             <Parameter Name="Contrasenna" Mode="In" Type="String" />
             <Parameter Name="RolID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ConsultarConsolas" ReturnType="Collection(ArcadeXModel.ConsultarConsolas_Result)" />
         </EntityContainer>
         <ComplexType Name="ConsultarUsuarios_Result">
           <Property Type="Int32" Name="UsuarioID" Nullable="false" />
@@ -238,6 +243,14 @@
           <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="RolID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="ConsultarConsolas_Result">
+          <Property Type="Int32" Name="ConsolaID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Fabricante" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaLanzamiento" Nullable="true" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="URLImagen" Nullable="true" MaxLength="255" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -247,6 +260,7 @@
           <EntitySetMapping Name="Consolas">
             <EntityTypeMapping TypeName="ArcadeXModel.Consolas">
               <MappingFragment StoreEntitySet="Consolas">
+                <ScalarProperty Name="URLImagen" ColumnName="URLImagen" />
                 <ScalarProperty Name="ConsolaID" ColumnName="ConsolaID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
@@ -321,6 +335,18 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RegistrarConsola" FunctionName="ArcadeXModel.Store.RegistrarConsola" />
           <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="ArcadeXModel.Store.RegistrarUsuario" />
+          <FunctionImportMapping FunctionImportName="ConsultarConsolas" FunctionName="ArcadeXModel.Store.ConsultarConsolas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ArcadeXModel.ConsultarConsolas_Result">
+                <ScalarProperty Name="ConsolaID" ColumnName="ConsolaID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+                <ScalarProperty Name="FechaLanzamiento" ColumnName="FechaLanzamiento" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="URLImagen" ColumnName="URLImagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

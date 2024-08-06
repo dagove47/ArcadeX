@@ -123,6 +123,9 @@
     <Compile Include="baseDatos\Consolas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="baseDatos\ConsultarConsolas_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="baseDatos\ConsultarUsuarios_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -158,11 +161,14 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Entidades\Consola.cs" />
     <Compile Include="Entidades\Consulta.cs" />
+    <Compile Include="Entidades\ConsultaConsolas.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConsolaModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Models\StoreModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
