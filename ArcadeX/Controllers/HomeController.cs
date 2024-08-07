@@ -10,7 +10,7 @@ namespace arcadeX.Controllers
     {
         UsuarioModel usuarioM = new UsuarioModel(); // Instancia correcta
         ConsolaModel consolaM = new ConsolaModel(); // Instancia correcta
-        public ActionResult HomePage()
+        public ActionResult Index()
         {
             return View();
         }
@@ -47,12 +47,20 @@ namespace arcadeX.Controllers
             var respuesta = consolaM.RegistrarConsola(consola);
 
             if (respuesta)
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Home");
             else
             {
                 ViewBag.msj = "Su información ya existe en nuestro sistema";
                 return View();
             }
         }
+        [HttpGet]
+        public ActionResult MostrarConsolas()
+        {
+            var result = consolaM.ConsultarConsolas();
+            return View(result);
+        }
+
+
     }
 }

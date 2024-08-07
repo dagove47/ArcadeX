@@ -16,7 +16,7 @@
             </div>
         }
 
-        @using (Html.BeginForm("Registrar", "Consolas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("RegistroConsolas", "Home"))
         {
             <div class="input-group mb-3">
                 @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })

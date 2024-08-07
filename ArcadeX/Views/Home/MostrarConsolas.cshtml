@@ -1,0 +1,43 @@
+﻿@model List<arcadeX.Entidades.ConsultaConsolas>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Mostrar Consolas";
+}
+
+<h2>Lista de Consolas</h2>
+
+<table id="tablaConsolas" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fabricante</th>
+            <th>Fecha de Lanzamiento</th>
+            <th>Precio</th>
+            <th>URL Imagen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var consola in Model)
+        {
+            <tr>
+                <td>@consola.Nombre</td>
+                <td>@consola.Fabricante</td>
+                <td>@consola.FechaLanzamiento.ToString("yyyy-MM-dd")</td>
+                <td>@consola.Precio.ToString("C")</td>
+                <td><a href="@consola.URLImagen" target="_blank">Ver Imagen</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/root/plugins/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#tablaConsolas").DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/es-ES.json'
+            }
+        });
+    });
+</script>
