@@ -10,6 +10,27 @@ namespace arcadeX.Controllers
     {
         UsuarioModel usuarioM = new UsuarioModel(); // Instancia correcta
         ConsolaModel consolaM = new ConsolaModel(); // Instancia correcta
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+                }
+                else
+                {
+                    ViewBag.Layout = "~/Views/Shared/_LayoutStore.cshtml";
+                }
+            }
+            else
+            {
+                ViewBag.Layout = "~/Views/Shared/_LayoutStore.cshtml";
+            }
+
+            base.OnActionExecuting(filterContext);
+        }
         public ActionResult Index()
         {
             return View();
@@ -59,6 +80,13 @@ namespace arcadeX.Controllers
         {
             var result = consolaM.ConsultarConsolas();
             return View(result);
+        }
+
+        [HttpGet]
+        public ActionResult Iniciarsesion( )
+        {
+           
+            return View();
         }
 
 

@@ -1,7 +1,7 @@
 ﻿@model arcadeX.Entidades.Usuario
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
     ViewBag.Title = "RegistroUsuario";
 }
 
@@ -16,7 +16,7 @@
             </div>
         }
 
-        @using (Html.BeginForm("RegistroUsuario", "Home"))
+        @using (Html.BeginForm("RegistroUsuario", "Store"))
         {
             <div class="input-group mb-3">
                 @Html.TextBoxFor(m => m.Identificacion, new { @type = "text", @class = "form-control", @placeholder = "Cedula" })

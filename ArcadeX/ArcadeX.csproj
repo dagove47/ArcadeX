@@ -357,12 +357,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LayoutStore.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\RegistroUsuario.cshtml" />
+    <Content Include="Views\Store\RegistroUsuario.cshtml" />
     <Content Include="Views\Home\RegistroConsolas.cshtml" />
     <Content Include="Views\Home\ConsultaUsuarios.cshtml" />
     <Content Include="Views\Home\ConsultaJuegos.cshtml" />
     <Content Include="Views\Home\Consolas.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Iniciarsesion.cshtml" />
     <Content Include="Views\Store\HomePage.cshtml" />
     <Content Include="Views\Store\Game.cshtml" />
     <Content Include="Views\Home\MostrarConsolas.cshtml" />
