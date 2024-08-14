@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
                     <li>@Html.ActionLink("Inicio", "HomePage", "Store", new { area = "" }, new { @class = "nav-link ms-5" })</li>
-                    <li>@Html.ActionLink("Pedidos", "Pedidos", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
+                    <li>@Html.ActionLink("Pedidos", "Game", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
                     <li>@Html.ActionLink("Contactenos", "Contactenos", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
                     <li>@Html.ActionLink("Perfil", "Perfil", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
                     <li>@Html.ActionLink("Iniciar sesion", "Iniciarsesion", "Home", new { area = "" }, new { @class = "nav-link ms-3" })</li>
@@ -76,6 +76,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/VideoGames.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
