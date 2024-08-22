@@ -17,6 +17,5 @@ namespace arcadeX.Entidades
 
         public String URLImagen { get; set; }
 
-        public int MyProperty { get; set; }
     }
 }
