@@ -16,5 +16,7 @@ namespace arcadeX.Entidades
         public decimal Precio { get; set; }
 
         public String URLImagen { get; set; }
+
+        public int MyProperty { get; set; }
     }
 }
