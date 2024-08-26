@@ -1,13 +1,13 @@
 ﻿@model arcadeX.Entidades.Usuario
 
 @{
-    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+    Layout = "~/Views/Shared/_LayoutInitial.cshtml";
     ViewBag.Title = "RegistroUsuario";
 }
 
-<div class="card">
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">Registrar Usuario</p>
+<main class="">
+    <section class="regLog col">
+        <h1 class="regLog-Title">Registrarse</h1>
 
         @if (ViewBag.msj != null)
         {
@@ -18,53 +18,33 @@
 
         @using (Html.BeginForm("RegistroUsuario", "Store"))
         {
-            <div class="input-group mb-3">
+            <div class="input-group">
                 @Html.TextBoxFor(m => m.Identificacion, new { @type = "text", @class = "form-control", @placeholder = "Cedula" })
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-id-card"></span>
-                    </div>
-                </div>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group">
                 @Html.TextBoxFor(m => m.Nombre, new { @type = "text", @class = "form-control", @placeholder = "Nombre" })
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-user"></span>
-                    </div>
-                </div>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group">
                 @Html.TextBoxFor(m => m.Email, new { @type = "email", @class = "form-control", @placeholder = "Correo Electrónico" })
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group">
                 @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", @placeholder = "Contraseña" })
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                </div>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group">
                 @Html.DropDownListFor(m => m.RolID, new SelectList(ViewBag.Roles, "RolID", "Nombre"), new { @class = "form-control" })
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-user-tag"></span>
-                    </div>
-                </div>
             </div>
-            <div class="row">
-                <div class="col-8">
-                </div>
-                <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">Procesar</button>
-                </div>
+            <div class="regLog-Submit mt-3">
+                <button type="submit" class="btn btn-block">Registrarse</button>
             </div>
         }
-    </div>
-</div>
+
+        <p class="mt-4 mb-1 regLog-Options">
+            <a href="@Url.Action("Iniciarsesion", "Home")">¿Ya tienes una cuenta? Ingresar</a>
+        </p>
+    </section>
+</main>
+
+<script>
+    const body = document.getElementById("bodyRegLog");
+    body.classList.add("bodyRegister")
+</script>

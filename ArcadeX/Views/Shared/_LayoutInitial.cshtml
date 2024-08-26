@@ -1,0 +1,80 @@
+﻿﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/InitialLayout.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body id="bodyRegLog">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("ArcadeX", "Index", "Home", new { area = "" }, new { @class = "navbar-brand me-5 mainColor" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1 justify-content-end">
+                    <li>@Html.ActionLink("HomePage(*Eliminar*)", "HomePage", "Store", new { area = "" }, new { @class = "nav-link ms-5" })</li>
+                    <li>@Html.ActionLink("Registrarse", "RegistroUsuario", "Store", new { area = "" }, new { @class = "nav-link ms-5" })</li>
+                    <li>@Html.ActionLink("Iniciar sesion", "Iniciarsesion", "Home", new { area = "" }, new { @class = "nav-link ms-3" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content containerRegLog">
+        @RenderBody()
+    </div>
+    <footer class="bg-dark footer-distributed mt-5">
+        <div class="footer-left">
+            <h3><span>ArcadeX</span> Store</h3>
+            <p class="footer-links">
+                @Html.ActionLink("Inicio", "HomePage", "Store", new { area = "" }, new { @class = "link-1" })
+                @Html.ActionLink("Nosotros", "Nosotros", "Store", new { area = "" })
+                @Html.ActionLink("Precio", "Precio", "Store", new { area = "" })
+                @Html.ActionLink("Contacto", "Contactenos", "Store", new { area = "" })
+            </p>
+            <p class="footer-company-name">&copy; @DateTime.Now.Year <span style="color: #bc13fe;">ArcadeX</span> Store</p>
+        </div>
+        <div class="footer-center">
+            <div>
+                <i class="bi bi-geo-alt-fill"></i>
+                <p><span>San Antonio, Belén</span> Heredia, Costa Rica</p>
+            </div>
+            <div>
+                <i class="bi bi-phone"></i>
+                <p>+506 8765-4321</p>
+            </div>
+            <div>
+                <i class="bi bi-envelope"></i>
+                <p><a href="mailto:contact@arcadex.com">contact@arcadex.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>Sobre de nosotros</span>
+                Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+            </p>
+            <div class="footer-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+                <a href="#"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/VideoGames.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
