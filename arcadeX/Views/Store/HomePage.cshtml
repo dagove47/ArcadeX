@@ -64,7 +64,40 @@
                             <div class="subtitle-card col">
                                 Lanzamiento: &nbsp;<p class="card-text" data-release>@game.Release_Date</p>
                             </div>
+                            <div class="subtitle-card col card-modal-btn">
+                                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#cardModal-@game.Id">Información</a>
+                            </div>
                         </div>
+                        <div class="modal fade" id="cardModal-@game.Id" tabindex="-1" aria-labelledby="cardModalLabel-@game.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content"
+                                     style="background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('@game.Thumbnail');">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fw-bold mainColor" id="cardModalLabel-@game.Id">@game.Title</h1>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="subtitle-modal col">
+                                            Genero: &nbsp;<p class="modal-text">@game.Genre</p>
+                                        </div>
+                                        <div class="subtitle-modal col">
+                                            Plataforma: &nbsp;<p class="modal-text">@game.Platform</p>
+                                        </div>
+                                        <div class="subtitle-modal col">
+                                            Compañía: &nbsp;<p class="modal-text">@game.Publisher</p>
+                                        </div>
+                                        <div class="subtitle-modal col">
+                                            Lanzamiento: &nbsp;<p class="modal-text">@game.Release_Date</p>
+                                        </div>
+                                        <p class="modal-game-description">@game.Short_Description</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn modalbtn2" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn modalbtn1">Comprar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 }
             </div>

@@ -80,6 +80,7 @@ body {
     color: #fff;
 }
 
+
 .games-list-wrapper {
     width: 1200px;
     height: 100%;
@@ -87,11 +88,14 @@ body {
 }
 
 .games-list-wrapper h2 {
-    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #bc13fe;
 }
 
 .games-list-wrapper div input {
-    box-shadow: 0 0 0.7em #00b5cc;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 1em #bc13fe;
     border-radius: 15px;
 }
 
@@ -108,7 +112,7 @@ body {
 
 .cards-list .card {
     margin: 16px;
-    box-shadow: 0 0 0.5em #00b5cc;
+    box-shadow: 0 0 0.7em #bc13fe;
     border-radius: 15px;
 }
 
@@ -118,19 +122,104 @@ body {
 
 .subtitle-card {
     display: flex;
-    color: #b2df28;
+    color: #00b5cc;
 }
 
 .card-text {
     color: #fff;
 }
 
+.card-modal-btn {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 0;
+}
+
+.card-modal-btn a {
+    background: rgba(188, 19, 254, 0.5);
+    color: #fff;
+    border: 2px solid #bc13fe;
+    width: 100%;
+}
+
+.card-modal-btn a:hover {
+    color: #fff;
+    box-shadow: 0 0 1em #bc13fe;
+}
+
 .hide {
     display: none;
 }
 
-/* Game Info */
+/* Modal */
 
+.modal {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.modal-header {
+    width: 100%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.modal-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.modal-content {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 0.7em #bc13fe;
+}
+
+.subtitle-modal {
+    font-size: 1.2rem;
+    display: flex;
+    color: #00b5cc;
+    font-weight: 600;
+}
+
+.modal-text {
+    color: #fff;
+    font-weight: normal;
+}
+
+.modal-footer {
+    border: none;
+}
+
+.modal-game-description {
+    margin-top: 24px;
+    font-size: 1.2rem;
+}
+
+.modalbtn1 {
+    background: #bc13fe;
+    color: #fff;
+    border: 2px solid #bc13fe;
+}
+
+.modalbtn2 {
+    color: #fff;
+    border: 2px solid #bc13fe;
+}
+
+.modalbtn1:hover {
+    box-shadow: 0 0 1em #bc13fe;
+}
+
+.modalbtn2:hover {
+    box-shadow: 0 0 1em #bc13fe;
+}
+
+
+/* Game Info */
 .gameInfo-main {
     min-height: 80vh;
     display: flex;
