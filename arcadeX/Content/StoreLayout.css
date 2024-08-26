@@ -34,6 +34,15 @@ body {
     color: #ededed;
 }
 
+.herobtn {
+    color: #fff;
+    border: 2px solid #bc13fe;
+}
+
+.herobtn:hover {
+    box-shadow: 0 0 2em #bc13fe;
+}
+
 .homeIcons {
     width: 100%;
     height: 400px;

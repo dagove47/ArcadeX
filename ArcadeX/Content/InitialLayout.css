@@ -56,6 +56,27 @@ body {
     color: #bc13fe;
 }
 
+.herobtn1 {
+    background: #bc13fe;
+    color: #fff;
+    border: 2px solid #bc13fe;
+    width: 100%;
+}
+
+.herobtn2 {
+    color: #fff;
+    border: 2px solid #bc13fe;
+    width: 100%;
+}
+
+.herobtn1:hover {
+    box-shadow: 0 0 2em #bc13fe;
+}
+
+.herobtn2:hover {
+    box-shadow: 0 0 2em #bc13fe;
+}
+
 .regLog {
     display: flex;
     align-items: center;
@@ -64,6 +85,7 @@ body {
 
 .regLog-Title {
     font-size: 3rem;
+    font-weight: 600;
     color: #bc13fe;
     padding: 16px 0;
 }

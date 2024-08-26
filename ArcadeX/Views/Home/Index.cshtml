@@ -4,8 +4,15 @@
 }
 
 <main>
-    <section>
-
+    <section class="row flex-lg-row align-items-center g-5 py-5">
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Explora <span class="mainColor">ArcadeX</span>  <br /> La mayor tienda de videojuegos</h1>
+            <p class="lead heroText">Descubre lo último en videojuegos, consolas y tecnología. Encuentra ofertas especiales en PS4, PS5, Xbox, Nintendo Switch y accesorios.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+                <button type="button" class="btn btn-lg px-4 me-md-2 herobtn1" onclick="location.href='@Url.Action("Iniciarsesion", "Home")'">Iniciar Sesión</button>
+                <button type="button" class="btn btn-lg px-4 herobtn2" onclick="location.href='@Url.Action("RegistroUsuario", "Store")'">Registrarse</button>
+            </div>
+        </div>
     </section>
 </main>
 
