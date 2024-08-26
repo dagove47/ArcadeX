@@ -34,6 +34,14 @@ body {
     background-attachment: fixed;
 }
 
+.bodyIndex {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url("Assets/indexGif.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 .containerRegLog {
     display: flex;
     justify-content: center;
