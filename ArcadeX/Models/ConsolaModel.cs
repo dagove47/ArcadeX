@@ -32,7 +32,8 @@ namespace arcadeX.Models
                     Nombre = u.Nombre,
                     Fabricante = u.Fabricante,
                     FechaLanzamiento = u.FechaLanzamiento ?? DateTime.MinValue, // Manejar valor nulo
-                    Precio = u.Precio ?? 0, // Manejar valor nulo
+                    //Precio = u.Precio ?? 0, // Manejar valor nulo
+                    Precio = 0,
                     URLImagen = u.URLImagen
                 }).ToList();
 
