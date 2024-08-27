@@ -95,8 +95,15 @@ namespace arcadeX.Controllers
                 return View();
             }
         }
-
+        [HttpGet]
+        public ActionResult Contacto()
+        {
+            var result = consolaM.ConsultarConsolas();
+            return View(result);
+        }
 
 
     }
+
+
 }
