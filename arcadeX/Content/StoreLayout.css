@@ -15,6 +15,7 @@ body {
     color: #fff;
     font-size: 16px;
     font-family: "Varela Round", sans-serif;
+    min-height: 100vh;
 }
 
 .nav-link:hover {
@@ -273,6 +274,76 @@ body {
 .footer .list-unstyled {
     padding-left: 0;
     list-style: none;
+}
+
+
+/* Form style*/
+
+.bodyStoreRegLog {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url("https://images.pexels.com/photos/275033/pexels-photo-275033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.regLog {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.regLog-Title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #bc13fe;
+    padding: 16px 0;
+}
+
+.regLog form {
+    width: 250px;
+}
+
+.regLog form input {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.regLog form select {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.regLog form textarea {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.regLog form div {
+    padding: 16px 0;
+}
+
+.regLog-Submit {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.regLog-Submit .btn{
+    color: #fff;
+    border: 2px solid #bc13fe;
+    width: 100%;
+}
+
+.regLog-Submit .btn:hover{
+    background: #bc13fe;
+}
+
+.regLog-Options {
+    color: #adb5bd;
+}
+
+.regLog-Options:hover {
+    color: #bc13fe;
 }
 
 /* FOOTER */

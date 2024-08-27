@@ -40,7 +40,7 @@ namespace arcadeX.Controllers
         }
 
         [HttpGet]
-        public ActionResult Game()
+        public ActionResult Contactenos()
         {
             return View();
         }
