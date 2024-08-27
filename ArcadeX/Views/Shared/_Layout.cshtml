@@ -39,6 +39,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-user ml-2"></i>
+                        @Session["NombreUsuario"]
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header"></span>
@@ -68,7 +69,7 @@
         </nav>
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            @* <a href="@Url.Action("Home","Usuario")" class="brand-link">*@
+            
             <img src="~/root/dist/img/AdminLTELogo.png"
                  alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
@@ -90,6 +91,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="@Url.Action("RegistroUsuario","Home")" class="nav-link">
+                                        @Session["NombreUsuario"]
                                         <i class="far fa-users nav-icon"></i>
                                         <p>Registro Clientes</p>
                                     </a>
