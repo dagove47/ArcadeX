@@ -1,6 +1,7 @@
 ﻿using arcadeX.baseDatos;
 using arcadeX.Entidades;
 using arcadeX.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -11,26 +12,7 @@ namespace arcadeX.Controllers
         UsuarioModel usuarioM = new UsuarioModel(); // Instancia correcta
         ConsolaModel consolaM = new ConsolaModel(); // Instancia correcta
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (User.IsInRole("Admin"))
-                {
-                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
-                }
-                else
-                {
-                    ViewBag.Layout = "~/Views/Shared/_LayoutStore.cshtml";
-                }
-            }
-            else
-            {
-                ViewBag.Layout = "~/Views/Shared/_LayoutStore.cshtml";
-            }
-
-            base.OnActionExecuting(filterContext);
-        }
+        
         public ActionResult Index()
         {
             return View();
@@ -83,11 +65,37 @@ namespace arcadeX.Controllers
         }
 
         [HttpGet]
-        public ActionResult Iniciarsesion( )
+        public ActionResult Iniciarsesion()
         {
-           
             return View();
         }
+        [HttpPost]
+        public ActionResult Iniciarsesion(Usuario user)
+
+        {
+            var respuesta = usuarioM.IniciarSesion(user);
+
+            if (respuesta != null)
+            {
+                //if (respuesta.EsClaveTemporal == true && respuesta.ClaveVencimiento <= DateTime.Now)
+                //{
+                //    ViewBag.msj = "Su contraseña temporal ha caducado";
+                //    return View();
+                //}
+
+                Session["NombreUsuario"] = respuesta.Nombre;
+                Session["EmailUsuario"] = respuesta.Email;
+                Session["RolIdUsuario"] = respuesta.RolID.ToString();
+                Session["IdentificacionUsuario"] = respuesta.Identificacion;
+                return RedirectToAction("HomePage", "Store");
+            }
+            else
+            {
+                ViewBag.msj = "Su información no es correcta";
+                return View();
+            }
+        }
+
 
 
     }

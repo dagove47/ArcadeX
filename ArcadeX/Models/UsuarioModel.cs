@@ -24,6 +24,38 @@ namespace arcadeX.Models
             return rowsAffected > 0;
         }
 
+        public IniciarSesion_Result IniciarSesion(Usuario user)
+        {
+            using (var context = new ArcadeXEntities())
+            {
+                
+                var usuario = (from x in context.Usuarios
+                               where x.Email == user.Email
+                               && x.Contrasenna == user.Contrasena
+                               select x).FirstOrDefault();
+
+                // Aquí debes determinar cómo quieres manejar el resultado
+
+                if (usuario != null)
+                {
+                    // Si el usuario se encuentra, devolvemos la información necesaria
+                    return new IniciarSesion_Result
+                    {
+                        Nombre = usuario.Nombre,
+                        Identificacion = usuario.Identificacion,
+                        Email = usuario.Email,
+                        RolID = usuario.RolID,
+                        // Inicializa otras propiedades según sea necesario
+                    };
+                }
+                else
+                {
+                    // Si no se encuentra el usuario, devolvemos null
+                    return null;
+                }
+            }
+        }
+
         private bool ExisteCorreo(string email)
         {
             using (var context = new ArcadeXEntities())
