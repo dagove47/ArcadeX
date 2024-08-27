@@ -21,6 +21,10 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
+                    @if (@Session["RolIdUsuario"].ToString() != null && @Session["RolIdUsuario"].ToString() == "1")
+                    {
+                        <li>@Html.ActionLink("Admin Panel", "ConsultaUsuarios", "Home", new { area = "" }, new { @class = "nav-link ms-5 mainColor" })</li>
+                    }
                     <li>@Html.ActionLink("Inicio", "HomePage", "Store", new { area = "" }, new { @class = "nav-link ms-5" })</li>
                     <li>@Html.ActionLink("Carrito", "Game", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
                     <li>@Html.ActionLink("Contactenos", "Contactenos", "Store", new { area = "" }, new { @class = "nav-link ms-3" })</li>
