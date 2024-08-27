@@ -1,21 +1,17 @@
 ﻿@model arcadeX.Entidades.Usuario
-
 @{
     Layout = "~/Views/Shared/_LayoutInitial.cshtml";
     ViewBag.Title = "Home Page";
 }
-
 <main class="">
     <section class="regLog col">
         <h1 class="regLog-Title">Iniciar Sesión</h1>
-
         @if (ViewBag.msj != null)
         {
             <div class="alert alert-info" role="alert" style="text-align:center">
                 @ViewBag.msj
             </div>
         }
-
         @using (Html.BeginForm("Iniciarsesion", "Home"))
         {
             <div class="input-group">
@@ -28,16 +24,14 @@
                 <button type="submit" class="btn btn-block">Ingresar</button>
             </div>
         }
-
         <p class="mt-3 mb-2 regLog-Options">
-            <a href="@Url.Action("RecuperarAcceso","Login")">Olvidé mi contraseña</a>
+            <a href="@Url.Action("SolicitarRecuperacion","RecuperarAcceso")">Olvidé mi contraseña</a>
         </p>
         <p class="regLog-Options">
             <a href="@Url.Action("RegistroUsuario","Store")" class="text-center">Crear una cuenta</a>
         </p>
     </section>
 </main>
-
 <script>
     const body = document.getElementById("bodyRegLog");
     body.classList.add("bodyLogIn")

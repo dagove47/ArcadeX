@@ -2,6 +2,7 @@
 using arcadeX.baseDatos;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace arcadeX.Models
 {
@@ -28,7 +29,7 @@ namespace arcadeX.Models
         {
             using (var context = new ArcadeXEntities())
             {
-                
+
                 var usuario = (from x in context.Usuarios
                                where x.Email == user.Email
                                && x.Contrasenna == user.Contrasena
@@ -56,7 +57,7 @@ namespace arcadeX.Models
             }
         }
 
-        private bool ExisteCorreo(string email)
+        public bool ExisteCorreo(string email)
         {
             using (var context = new ArcadeXEntities())
             {
@@ -77,6 +78,46 @@ namespace arcadeX.Models
                 }).ToList();
 
                 return result;
+            }
+        }
+        public bool GuardarTokenRecuperacion(string email, string token, DateTime expiracion)
+        {
+            using (var context = new ArcadeXEntities())
+            {
+                var usuario = context.Usuarios.FirstOrDefault(u => u.Email == email);
+                if (usuario != null)
+                {
+                    usuario.TokenRecuperacion = token;
+                    usuario.TokenExpiracion = expiracion;
+                    return context.SaveChanges() > 0;
+                }
+                return false;
+            }
+        }
+
+        public bool ValidarTokenRecuperacion(string token)
+        {
+            using (var context = new ArcadeXEntities())
+            {
+                var usuario = context.Usuarios.FirstOrDefault(u => u.TokenRecuperacion == token);
+                return usuario != null && usuario.TokenExpiracion > DateTime.Now;
+            }
+        }
+
+        public bool RestablecerContrasena(string token, string nuevaContrasena)
+        {
+            using (var context = new ArcadeXEntities())
+            {
+                var usuario = context.Usuarios.FirstOrDefault(u => u.TokenRecuperacion == token);
+                if (usuario != null && usuario.TokenExpiracion > DateTime.Now)
+                {
+                    usuario.Contrasenna = nuevaContrasena; // Considera encriptar la contraseña aquí
+                    usuario.TokenRecuperacion = null;
+                    usuario.TokenExpiracion = null;
+                    return context.SaveChanges() > 0;
+                }
+                return false;
+
             }
         }
     }

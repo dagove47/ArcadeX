@@ -1,0 +1,29 @@
+﻿@model arcadeX.Entidades.Usuario
+@{
+    Layout = "~/Views/Shared/_LayoutInitial.cshtml";
+    ViewBag.Title = "Restablecer Contraseña";
+}
+<main class="">
+    <section class="regLog col">
+        <h1 class="regLog-Title">Restablecer Contraseña</h1>
+        @if (ViewBag.msj != null)
+        {
+            <div class="alert alert-info" role="alert" style="text-align:center">
+                @ViewBag.msj
+            </div>
+        }
+        @using (Html.BeginForm("RestablecerContrasena", "RecuperarAcceso"))
+        {
+            @Html.HiddenFor(m => m.tokenRecuperacion)
+            <div class="input-group">
+                @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", @placeholder = "Nueva Contraseña" })
+            </div>
+            <div class="input-group">
+                <input type="password" name="confirmarContrasena" class="form-control" placeholder="Confirmar Nueva Contraseña" required />
+            </div>
+            <div class="regLog-Submit mt-3">
+                <button type="submit" class="btn btn-block">Restablecer Contraseña</button>
+            </div>
+        }
+    </section>
+</main>

@@ -12,5 +12,8 @@ namespace arcadeX.Entidades
         public String Email { get; set; }
         public String Contrasena { get; set; }
         public int RolID { get; set; }
+
+        public String tokenRecuperacion { get; set; }
+        public DateTime tokenExpiracion { get; set; }
     }
 }
