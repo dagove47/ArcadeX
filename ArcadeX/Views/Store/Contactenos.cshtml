@@ -3,32 +3,60 @@
     ViewBag.Title = "Contactenos";
     Layout = "~/Views/Shared/_LayoutStore.cshtml";
 }
+<style>
+    .contact-info {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
+        .contact-info h2 {
+            color: rgba(188, 19, 254, 0.5);
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .contact-info p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .contact-info .info-item {
+            padding: 25px 0;
+        }
+
+            .contact-info .info-item i {
+                color: #007bff;
+                margin-right: 10px;
+            }
+
+</style>
 <main class="regLogMain">
     <section class="regLog col">
         <h1 class="regLog-Title">Contáctenos</h1>
-        <form id="form">
-            <div class="input-group">
-                <input class="form-control" name="newName" id="newName" placeholder="Nombre" type="text" value="" />
+        <div class="contact-info">
+            <h2>Información de Contacto</h2>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <strong>Dirección:</strong>
+                1234 Calle Ficticia, Ciudad Imaginaria de Belén, Heredia, Costa Rica
             </div>
-            <div class="input-group">
-                <input class="form-control" name="newEmail" id="newEmail" placeholder="Correo Electrónico" type="email" value="" />
+            <div class="info-item">
+                <i class="fas fa-phone"></i>
+                <strong>Teléfono:</strong>
+                +(506) 1234-5678
             </div>
-            <div class="input-group">
-                <input class="form-control" name="newSubject" id="newSubject" placeholder="Asunto" type="text" value="" />
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <strong>Email:</strong>
+                arcadex@arcadex.com
             </div>
-            <div class="input-group">
-                <textarea class="form-control" cols="20" name="newMessage" id="newMessage" placeholder="Mensaje" rows="5" value=>
-                </textarea>
-            </div>
-            <div class="regLog-Submit mt-3">
-                <button type="submit" class="btn btn-block">Enviar</button>
-            </div>
-        </form>
+        </div>
     </section>
 </main>
-
 <script>
     const body = document.getElementById("bodyStore");
-    body.classList.add("bodyStoreRegLog")
+    body.classList.add("bodyStoreRegLog");
 </script>
+
